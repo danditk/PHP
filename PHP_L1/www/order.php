@@ -17,9 +17,27 @@
 
 	$paczek = $_POST['paczek'];
 	$grzebien = $_POST['grzebien'];
+	$sum = $paczek*0.99+$grzebien*1.29;
 
-	echo "<h2>$paczek</h2>";
-	echo "<h2>$grzebien</h2>";
+	echo<<<END
+		<h2>Podsumowanie zamówienia</h2>
+		<table border="1" cellpadding="10" cellspacing="0">
+			<tr>
+				<td>Pączek (0.99 PLN/szt)</td><td>$paczek</td>
+			<tr>
+			<tr>
+				<td>Grzebień (1.29 PLN/szt)</td><td>$grzebien</td>
+			<tr>
+			<tr>
+				<td>SUMA</td><td>$sum PLN</td>
+			<tr>
+		</table>
+
+		<br>
+	  <a href="index.php">Powrót do zamówienia</a>
+
+END;
+
 
 ?>
 
