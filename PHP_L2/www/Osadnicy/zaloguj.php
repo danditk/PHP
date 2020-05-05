@@ -1,5 +1,7 @@
 <?php
 
+	session_start();
+
 	require_once "connect.php";
 
 	$polaczenie = @new mysqli($host, $db_user, $db_password, $db_name);
@@ -18,13 +20,23 @@
 			$ilu_userow = $rezultat->num_rows;
 			if($ilu_userow>0) {
 				$row = $rezultat->fetch_assoc();
-				$user = $row['user'];
+				$_SESSION['user'] = $row['user'];
+				$_SESSION['drewno'] = $row['drewno'];
+				$_SESSION['kamien'] = $row['kamien'];
+				$_SESSION['zboze'] = $row['zboze'];
+				$_SESSION['dnipremium'] = $row['dnipremium'];
+				$_SESSION['email'] = $row['email'];
 
-				echo $user;
-
+				unset($_SESSION['bladlogowania']);
 				$rezultat->close();
+
+				header('Location: gra.php');
+
 			} else {
-				// code...
+
+				$_SESSION['bladlogowania'] = '<br><span style="color: red;">Nieprawidłowy login lub hasło<br>Spróbuj jeszcze raz.';
+
+				header('Location: index.php');
 			}
 		}
 

@@ -4,6 +4,7 @@
 
 <!DOCTYPE HTML>
 
+
 <html lang="pl">
 
 <head>
@@ -16,16 +17,16 @@
 	<link rel="stylesheet" href="style.css" type="text/css">
 </head>
 <body>
-  <h1>Tylko martwi ujrzeli koniec wojny - Platon</h1><br><br>
-
-  <form class="" action="zaloguj.php" method="post">
-    Login: <br> <input type="text" name="login"><br><br>
-    Hasło: <br> <input type="password" name="password"><br><br>
-    <input type="submit" value="Zaloguj">
-  </form>
 
 <?php
-	if(isset($_SESSION['bladlogowania'])) echo $_SESSION['bladlogowania'];
+
+	echo "<p>Witaj ".$_SESSION['user']."!";
+	echo "<p><b>Drewno</b>: ".$_SESSION['drewno'];
+	echo " | <b>Kamień</b>: ".$_SESSION['kamien'];
+	echo " | <b>Zboże</b>: ".$_SESSION['zboze'];
+
+	echo "<p><b>E-mail</b>: ".$_SESSION['email'];
+	echo "<br><b>Dni premium</b>: ".$_SESSION['dnipremium'];
 ?>
 
 </body>
