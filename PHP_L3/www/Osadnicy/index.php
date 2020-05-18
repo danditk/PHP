@@ -24,6 +24,8 @@
 <body>
   <h1>Tylko martwi ujrzeli koniec wojny - Platon</h1><br><br>
 
+	<a href="rejestracja.php">Załuż konto</a><br><br>
+
   <form class="" action="zaloguj.php" method="post">
     Login: <br> <input type="text" name="login"><br><br>
     Hasło: <br> <input type="password" name="password"><br><br>
