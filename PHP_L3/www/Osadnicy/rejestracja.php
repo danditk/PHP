@@ -16,6 +16,9 @@
 	<meta name="description" content="Opis witryny" />
 	<meta name="keywords" content="słowa kluczowe" />
 	<link rel="stylesheet" href="style.css" type="text/css">
+  <script src="https://www.google.com/recaptcha/api.js" async defer></script>
+
+
 </head>
 <body>
 	<br>
@@ -48,8 +51,13 @@
 			<input type="checkbox" name="regulamin"> Akceptuje regulamin
 		</label>
 		<br><br>
+
+		<div class="g-recaptcha" data-sitekey="6LfVRvkUAAAAACDzvAKi_yDq-BSpbpAgoSthq4eK
+"></div>
+    <br/>
+
 		<label>
-			<input type="submit" name="" value="Potwierdź">
+			<input type="submit" name="" value="Zarejestruj się">
 		</label>
 	</form>
 
