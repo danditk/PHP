@@ -14,6 +14,38 @@
 			$_SESION['e_login'] = "Login powinien zawierać od 3 do 20 znaków";
 		}
 
+		//Sprawdzanie czy login ma poprawne znaki
+		if (ctype_alnum($login)==false){
+			$wszystko_OK = false;
+			$_SESION['e_login'] = "Login powinien składać się wyłącznie z cyfr oraz<br/>wielkich i małych liter bez polskich znaków";
+		}
+
+		//Sprawdzenie czy to e-mail
+		$email = $_POST['email'];
+		$emailB = filter_var($email, FILTER_SANITIZE_EMAIL);
+
+		if ((filter_var($email, FILTER_VALIDATE_EMAIL) == false) || ($emailB != $email)){
+			$wszystko_OK = false;
+			$_SESION['e_email'] = "Nieprawidłowy e-mail, wprowadź poprawny mail";
+		}
+
+		//Sprawdzanie poprawności hasła
+		$password1 = $_POST['haslo1'];
+		$passwprd2 = $_POST['haslo2'];
+
+		//Sprawdzanie długości
+		if ((strlen($password1) < 8) || (strlen($password1) > 20)) {
+			$wszystko_OK = false;
+			$_SESION['e_haslo'] = "Hasło powinno zawierać w sobie od 8 do 20 znaków ";
+		}
+
+		//Jeśli hasła są od siebie różne
+		if ($password1 != $passwprd2) {
+			$wszystko_OK = false;
+			$_SESION['e_haslo'] = "Podane hasła nie są takie same, spróbuj ponownie";
+		}
+
+		//Jeśli wszystko jest poprawnie
 		if ($wszystko_OK == true){
 			//Hurra, wszystkie testy zaliczone, dodajemy gracza do bazy
 			echo "Udana walidacja"; exit();
@@ -53,7 +85,6 @@
 		</label>
 		<br>
 		<input type="text" name="login">
-		<br><br>
 
 		<?php
 
@@ -63,32 +94,50 @@
 			}
 
 		?>
+		<br>
 
 		<label for="email">
 			<b>Twój e-mail: </b>
 		</label>
 		<br>
 		<input type="email" name="email">
-		<br><br>
+
+		<?php
+
+				if (isset($_SESION['e_email'])){
+					echo '<div class="error">'.$_SESION['e_email'].'</div>';
+					unset($_SESION['e_email']);
+				}
+		?>
+		<br>
 
 		<label for="haslo1">
 			<b>Twoje hasło: </b>
 		</label>
 		<br>
 		<input type="password" name="haslo1">
-		<br><br>
+		<br>
 
 		<label for="haslo2">
 			<b>Powtórz hasło: </b>
 		</label>
 		<br>
 		<input type="password" name="haslo2">
-		<br><br>
+		<br>
+
+		<?php
+
+			if (isset($_SESION['e_haslo'])) {
+				echo '<div class="error">'.$_SESION['e_haslo'].'</div>';
+				unset($_SESION['e_haslo']);
+			}
+
+		?>
 
 		<label>
 			<input type="checkbox" name="regulamin"> Akceptuje regulamin
 		</label>
-		<br><br>
+		<br>
 
 		<div class="g-recaptcha" data-sitekey="6LfVRvkUAAAAACDzvAKi_yDq-BSpbpAgoSthq4eK
 "></div>
